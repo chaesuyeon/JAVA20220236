@@ -3,7 +3,7 @@
 [수연의 자바프로젝트 메인 주소](https://github.com/chaesuyeon/JAVA20220236)
 
 ♪ 1주차, 연습해보기!
-(https://github.com/chaesuyeon/JAVA20220236/blob/main/Index1.html)
+[✓ 1주차 연습](https://github.com/chaesuyeon/JAVA20220236/blob/main/Index1.html)
 
 ♪ 2주차, 수업 메인화면 개발 완료!
 
