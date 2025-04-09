@@ -14,3 +14,9 @@
 ♪ 4주차, 수업 네비게이션 바 적용 해보기!
 [✓ 4주차 실습](https://github.com/chaesuyeon/JAVA20220236/blob/main/index4.html)
 네비게이션 바, 테이블, 검색까지 완료!
+
+♪ 5주차, 수업 JS 및 PopUp창 완료!
+[✓ 5주차 실습](https://github.com/chaesuyeon/JAVA20220236/blob/main/index4.html)
+[✓ JS 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/JS)
+[✓ POPUP 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/popup)
+
