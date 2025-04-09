@@ -13,10 +13,11 @@
         
         <script type="text/javascript" defer src="JS/Basic_js_test.js"></script>
         <script type="text/javascript" defer src="JS/Search.js"></script>
+        <script type="text/javascript" defer src="JS/pop_up.js"></script>
 
 
     </head>
-    <body style="background-color:rgb(0, 0, 0)">
+    <body style="background-color:rgb(0, 0, 0)" onload="pop_up();">
         <div class="container-fluid" style="display: flex; justify-content: center;">
             <img src="header_logo.png" width="200" height="60">
             <h3 style="font-size: 24px; font-weight: bold; font-style: italic; color: white;">
@@ -55,9 +56,10 @@
                         <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                       </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                      <input class="form-control me-2" type="search" placeholder="키워드 입력" aria-label="Search">
-                      <button class="btn btn-outline-success" id="search_btn" type="submit">검색하기</button>
+                      <form class="d-flex" role="search" onsubmit="return googleSearch();">
+                        <input class="form-control me-2" id="search_input" name="q" type="search" placeholder="키워드 입력" aria-label="Search">
+                        <button class="btn btn-outline-success" id="search_btn" type="submit">검색하기</button>
+                        </form>
                     </form>
                   </div>
                 </div>
