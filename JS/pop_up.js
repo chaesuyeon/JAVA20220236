@@ -22,3 +22,11 @@ function show_clock(){
     }
     setTimeout(show_clock, 1000); //1초마다 갱신
     }
+
+    function over(obj) {
+        obj.src= "steambluelogo.png";
+        }
+        function out(obj) {
+        obj.src= "steamblacklogo.jpg";
+        }
+        
