@@ -17,6 +17,10 @@
 
 ♪ 5주차, 수업 JS 및 PopUp창 완료!
 [✓ 5주차 실습](https://github.com/chaesuyeon/JAVA20220236/blob/main/index4.html)
+
 [✓ JS 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/JS)
 [✓ POPUP 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/popup)
+
+♪ 6주차, 수업 PopUp창 시계 넣기!
+[✓ 6주차 실습]
 
