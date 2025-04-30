@@ -26,6 +26,7 @@
 
 ♪ 7주차, 수업 로그인 폼 완료!
 [✓ 7주차 실습](https://github.com/chaesuyeon/JAVA20220236/blob/main/Index6-7.html)
+> 로그아웃 창도 만들어보기 (완료!)
 
 🔥8주차, 중간고사🔥
 
