@@ -17,6 +17,7 @@
 
 ♪ 5주차, 수업 JS 및 PopUp창 완료!
 [✓ 5주차 실습](https://github.com/chaesuyeon/JAVA20220236/blob/main/Index4-5.html)
+> Search.js search_message()를 2개 이상 추가, 버튼 식별자 수정하기 (완료!)
 
 [✓ JS 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/JS)
 [✓ POPUP 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/popup)
