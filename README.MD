@@ -23,6 +23,7 @@
 
 ♪ 6주차, 수업 PopUp창 시간 넣기 완료!
 [✓ 6주차 실습](https://github.com/chaesuyeon/JAVA20220236/blob/main/Index6-7.html)
+> Search.js 수정하기. 공백과 비속어 검사 (완료!)
 
 ♪ 7주차, 수업 로그인 폼 완료!
 [✓ 7주차 실습](https://github.com/chaesuyeon/JAVA20220236/blob/main/Index6-7.html)
