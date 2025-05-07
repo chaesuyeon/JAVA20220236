@@ -16,6 +16,42 @@ const check_xss = (input) => {
     return sanitizedInput;
 };
 
+function setCookie(name, value, expiredays) {
+    var date = new Date();
+    date.setDate(date.getDate() + expiredays);
+    document.cookie = escape(name) + "=" + escape(value) +
+                      "; expires=" + date.toUTCString() + "; path=/";
+}
+
+function getCookie(name) {
+    var cookie = document.cookie;
+    console.log("쿠키를 요청합니다.");
+
+    if (cookie !== "") {
+        var cookie_array = cookie.split("; ");
+        for (var index in cookie_array) {
+            var cookie_name = cookie_array[index].split("=");
+            if (cookie_name[0] === name) {
+                return cookie_name[1];
+            }
+        }
+    }
+    return;
+}
+
+function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
+    const emailInput = document.getElementById('typeEmailX');
+    const idsave_check = document.getElementById('idSaveCheck');
+    let get_id = getCookie("id");
+    if(get_id) {
+    emailInput.value = get_id;
+    idsave_check.checked = true;
+    session_check(); // 세션 유무 검사
+    }
+}
+
+
+
 const check_input = () => {
     const loginForm = document.getElementById('login_form');
     const loginBtn = document.getElementById('login_btn');
@@ -26,8 +62,9 @@ const check_input = () => {
 
     const emailValue = emailInput.value.trim();
     const passwordValue = passwordInput.value.trim();
-    const sanitizedEmail = check_xss(emailInput);
-    const sanitizedPassword = check_xss(passwordInput);
+    const sanitizedEmail = check_xss(emailValue);
+    const sanitizedPassword = check_xss(passwordValue);
+    const idsave_check = document.getElementById('idSaveCheck');
 
 
     if (emailValue === '') {
@@ -64,16 +101,25 @@ const check_input = () => {
     }
 
     if (!sanitizedEmail) {
-        
         return false;
     }
+
     if (!sanitizedPassword) {
-        
         return false;
     }
-    
+
+    if(idsave_check.checked == true) { // 아이디 체크 o
+        alert("쿠키를 저장합니다.", emailValue);
+        setCookie("id", emailValue, 1); // 1일 저장
+        alert("쿠키 값 :" + emailValue);
+        }
+        else{ // 아이디 체크 x
+        setCookie("id", emailValue.value, 0); //날짜를 0 - 쿠키 삭제
+    } 
+
     console.log('이메일:', emailValue);
     console.log('비밀번호:', passwordValue);
+    session_set(); // 세션 생성
     loginForm.submit();
 };
 
