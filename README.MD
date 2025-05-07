@@ -36,3 +36,8 @@
 [✓ 9주차 실습](https://github.com/chaesuyeon/JAVA20220236/tree/main/JS)
 > JS 및 check_input함수 수정 (완료!)
 
+♪ 10주차, 수업 입력 쿠키 및 세션 적용 및 삭제 완료!
+> login_count() , login_failed() 함수 적용 (완료!)
+
+
+
