@@ -39,6 +39,38 @@ function getCookie(name) {
     return;
 }
 
+function login_count() {
+    let count = getCookie("login_cnt");
+    if (!count) count = 0;
+    count = parseInt(count) + 1;
+    setCookie("login_cnt", count, 1);
+    console.log("로그인 횟수: " + count);
+}
+
+// 로그아웃 시 호출
+function logout_count() {
+    let count = getCookie("logout_cnt");
+    if (!count) count = 0;
+    count = parseInt(count) + 1;
+    setCookie("logout_cnt", count, 1);
+    console.log("로그아웃 횟수: " + count);
+}
+
+// 로그인 실패 시 호출
+function login_failed() {
+    let fail = getCookie("fail_cnt");
+    if (!fail) fail = 0;
+    fail = parseInt(fail) + 1;
+    setCookie("fail_cnt", fail, 1);
+
+    if (fail >= 3) {
+        alert("로그인 3회 실패. 로그인이 제한됩니다.");
+        document.getElementById("login_btn").disabled = true;
+    } else {
+        alert("로그인 실패 횟수: " + fail);
+    }
+}
+
 function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
     const emailInput = document.getElementById('typeEmailX');
     const idsave_check = document.getElementById('idSaveCheck');
@@ -49,6 +81,16 @@ function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
     session_check(); // 세션 유무 검사
     }
 }
+
+function init_logined(){
+    if(sessionStorage){
+    decrypt_text(); // 복호화 함수
+    }
+    else{
+    alert("세션 스토리지 지원 x");
+    }
+}
+    
 
 
 
@@ -119,6 +161,7 @@ const check_input = () => {
 
     console.log('이메일:', emailValue);
     console.log('비밀번호:', passwordValue);
+    
     session_set(); // 세션 생성
     loginForm.submit();
 };
