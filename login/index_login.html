@@ -15,10 +15,13 @@
         <script type="text/javascript" defer src="JS/Search.js"></script>
         <script type="text/javascript" defer src="JS/popup.js"></script> -->
         <!-- <script type="text/javascript" defer src="JS/data_type.js"></script> -->
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
         <script type="text/javascript" defer src="../JS/login.js" defer></script>
         <script type="text/javascript" defer src="../JS/session.js" defer></script>
         <script type="text/javascript" defer src="../JS/crypto.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
     </head>
     <body style="background-color: blue;" onload="checkAuth(); init_logined();">
@@ -63,7 +66,7 @@
                       <form class="d-flex" role="search" onsubmit="return googleSearch();">
                         <input class="form-control me-2" id="search_input" name="q" type="search" placeholder="키워드 입력" aria-label="Search">
                         <button class="btn btn-outline-success" id="search_btn" type="submit">검색하기</button>
-                        <a href="login/login.html" class="btn btn-outline-success" id="login_btn">로그인</a>
+                        <a href="login/logout.html" class="btn btn-outline-success" id="login_btn">로그아웃</a>
                         </form>
                     </form>
                   </div>
@@ -120,6 +123,29 @@
             </table>
           </div>
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+          <script>
+          async function decryptSessionPassword() {
+          const encrypted = sessionStorage.getItem("Session_Storage_pass2");
+          if (!encrypted) {
+            console.warn("Session_Storage_pass2가 존재하지 않음");
+            return;
+          }
+
+          try {
+            const decrypted = await decryptAES(encrypted, "my_secret_key");
+            console.log("✅ 복호화된 비밀번호:", decrypted);
+          } catch (e) {
+            console.error("복호화 실패:", e);
+          }
+      }
+
+    window.onload = () => {
+        decryptSessionPassword(); // 로그인 시 자동 실행
+    };
+</script>
+
     </body>
+
     
 </html>

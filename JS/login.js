@@ -91,6 +91,20 @@ function init_logined() {
     }
 }
 
+
+function logout() {
+    // JWT 토큰 삭제
+    localStorage.removeItem("jwt_token");
+    //선택 사항: 세션도 정리
+    sessionStorage.clear(); // 또는 sessionStorage.removeItem("Session_Storage_pass2")
+    // 선택 사항: 쿠키도 정리
+    document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    //로그아웃 후 이동
+    location.href = "../index_login.html"; // 또는 메인 페이지
+}
+
+
+
 const check_input = () => {
     const loginForm = document.getElementById('login_form');
     const loginBtn = document.getElementById('login_btn');
@@ -110,6 +124,13 @@ const check_input = () => {
         exp: Math.floor(Date.now() / 1000) + 3600
     };
     const jwtToken = generateJWT(payload);
+
+    encryptAES(passwordValue, "my_secret_key").then(encrypted => {
+    sessionStorage.setItem("Session_Storage_pass2", encrypted);
+    });
+
+
+//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
     if (emailValue === '') {
         alert('이메일을 입력하세요.');
