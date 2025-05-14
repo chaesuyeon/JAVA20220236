@@ -20,7 +20,7 @@ function setCookie(name, value, expiredays) {
     var date = new Date();
     date.setDate(date.getDate() + expiredays);
     document.cookie = escape(name) + "=" + escape(value) +
-                      "; expires=" + date.toUTCString() + "; path=/";
+        "; expires=" + date.toUTCString() + "; path=/";
 }
 
 function getCookie(name) {
@@ -71,28 +71,25 @@ function login_failed() {
     }
 }
 
-function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
+function init() { // 로그인 폼에 쿠키에서 가져온 아이디 입력
     const emailInput = document.getElementById('typeEmailX');
     const idsave_check = document.getElementById('idSaveCheck');
+
     let get_id = getCookie("id");
-    if(get_id) {
-    emailInput.value = get_id;
-    idsave_check.checked = true;
-    session_check(); // 세션 유무 검사
+    if (get_id) {
+        emailInput.value = get_id;
+        idsave_check.checked = true;
+        session_check(); // 세션 유무 검사
     }
 }
 
-function init_logined(){
-    if(sessionStorage){
-    decrypt_text(); // 복호화 함수
-    }
-    else{
-    alert("세션 스토리지 지원 x");
+function init_logined() {
+    if (sessionStorage) {
+        decrypt_text(); // 복호화 함수
+    } else {
+        alert("세션 스토리지 지원 x");
     }
 }
-    
-
-
 
 const check_input = () => {
     const loginForm = document.getElementById('login_form');
@@ -108,6 +105,11 @@ const check_input = () => {
     const sanitizedPassword = check_xss(passwordValue);
     const idsave_check = document.getElementById('idSaveCheck');
 
+    const payload = {
+        id: emailValue,
+        exp: Math.floor(Date.now() / 1000) + 3600
+    };
+    const jwtToken = generateJWT(payload);
 
     if (emailValue === '') {
         alert('이메일을 입력하세요.');
@@ -150,19 +152,20 @@ const check_input = () => {
         return false;
     }
 
-    if(idsave_check.checked == true) { // 아이디 체크 o
+    if (idsave_check.checked == true) { // 아이디 체크 o
         alert("쿠키를 저장합니다.", emailValue);
         setCookie("id", emailValue, 1); // 1일 저장
         alert("쿠키 값 :" + emailValue);
-        }
-        else{ // 아이디 체크 x
+    } else { // 아이디 체크 x
         setCookie("id", emailValue.value, 0); //날짜를 0 - 쿠키 삭제
-    } 
+    }
 
     console.log('이메일:', emailValue);
     console.log('비밀번호:', passwordValue);
-    
+
     session_set(); // 세션 생성
+
+    localStorage.setItem('jwt_token', jwtToken);
     loginForm.submit();
 };
 

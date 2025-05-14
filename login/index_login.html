@@ -14,10 +14,14 @@
         <!-- <script type="text/javascript" defer src="JS/Basic_js_test.js"></script>
         <script type="text/javascript" defer src="JS/Search.js"></script>
         <script type="text/javascript" defer src="JS/popup.js"></script> -->
-        <script type="text/javascript" defer src="JS/data_type.js"></script>
+        <!-- <script type="text/javascript" defer src="JS/data_type.js"></script> -->
+        <script type="text/javascript" defer src="../JS/login.js" defer></script>
+        <script type="text/javascript" defer src="../JS/session.js" defer></script>
+        <script type="text/javascript" defer src="../JS/crypto.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     </head>
-    <body style="background-color:rgb(0, 0, 0)" onload="init_logined();">
+    <body style="background-color: blue;" onload="checkAuth(); init_logined();">
         <div class="container-fluid" style="display: flex; justify-content: center;">
             <img src="header_logo.png" width="200" height="60", onmouseover="over(this)" onmouseout="out(this)">
             <h3 style="font-size: 24px; font-weight: bold; font-style: italic; color: white;">
