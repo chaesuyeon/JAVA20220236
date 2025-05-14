@@ -3,6 +3,7 @@
 [수연의 자바프로젝트 깃허브 주소](https://github.com/chaesuyeon/JAVA20220236)
 
 [✓ JS 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/JS)
+[✓ login 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/login)
 [✓ POPUP 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/popup)
 
 ♪ 1주차, 연습해보기!
@@ -29,6 +30,9 @@
 
 ♪ 10주차, 수업 입력 쿠키 및 세션 적용 및 삭제 완료!
 > login_count() , login_failed() 함수 적용 (완료!)
+
+♪ 11주차, 웹 보안 – 암호화 & 보안 토큰 하기!
+> Web Crypto API 활용 및 JWT 토큰(jwt_token)을 삭제하는 함수 구현 (완료!)
 
 
 
