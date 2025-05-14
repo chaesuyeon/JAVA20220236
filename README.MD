@@ -2,7 +2,7 @@
 20220236 채수연👉
 [수연의 자바프로젝트 깃허브 주소](https://github.com/chaesuyeon/JAVA20220236)
 
-[🩷Main](https://github.com/chaesuyeon/JAVA20220236/blob/main/Index.html)
+[🩷MainWebPage](https://github.com/chaesuyeon/JAVA20220236/blob/main/Index.html)
 
 [✓ JS 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/JS)
 [✓ login 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/login)
