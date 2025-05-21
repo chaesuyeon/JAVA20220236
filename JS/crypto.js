@@ -1,3 +1,6 @@
+import { session_set, session_get, session_check } from './session.js';
+
+
 function encodeByAES256(key, data) {
     const cipher = CryptoJS.AES.encrypt(
         data,
@@ -24,7 +27,7 @@ function decodeByAES256(key, data) {
     return cipher.toString(CryptoJS.enc.Utf8);
 }
 
-function encrypt_text(password) {
+export function encrypt_text(password) {
     const k = "key";                            // 클라이언트 키
     const rk = k.padEnd(32, " ");               // AES256은 키 길이가 32바이트
     const b = password;
@@ -33,7 +36,7 @@ function encrypt_text(password) {
     return eb;
 }
 
-function decrypt_text() {
+export function decrypt_text() {
     const k = "key";                            // 서버 키 (동일해야 복호화 가능)
     const rk = k.padEnd(32, " ");               // AES256은 키 길이가 32바이트
     const eb = session_get();                   // 세션에서 암호화된 데이터 가져옴

@@ -1,7 +1,3 @@
-import { session_set, session_get, session_check } from './session.js';
-import { encrypt_text, decrypt_text } from './crypto.js';
-import { generateJWT, checkAuth } from './jwt_token.js';
-
 const check_xss = (input) => {
     // DOMPurify 라이브러리 로드 (CDN 사용)
     const DOMPurify = window.DOMPurify;
@@ -75,6 +71,11 @@ function login_failed() {
     }
 }
 
+import { session_set, session_get, session_check } from './session.js';
+import { encrypt_text, decrypt_text } from './crypto.js';
+import { generateJWT, checkAuth } from './jwt_token.js';
+
+
 function init() { // 로그인 폼에 쿠키에서 가져온 아이디 입력
     const emailInput = document.getElementById('typeEmailX');
     const idsave_check = document.getElementById('idSaveCheck');
@@ -88,8 +89,10 @@ function init() { // 로그인 폼에 쿠키에서 가져온 아이디 입력
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-init();
+checkAuth();
+init_logined();
 });
+
 
 
 function init_logined() {
