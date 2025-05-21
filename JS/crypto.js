@@ -1,19 +1,18 @@
-import { session_set, session_get, session_check } from './session.js';
-
-
+// AES 암호화
 function encodeByAES256(key, data) {
     const cipher = CryptoJS.AES.encrypt(
         data,
         CryptoJS.enc.Utf8.parse(key),
         {
-            iv: CryptoJS.enc.Utf8.parse(""),       // IV 초기화 벡터
-            padding: CryptoJS.pad.Pkcs7,           // 패딩
-            mode: CryptoJS.mode.CBC                // 운영 모드
+            iv: CryptoJS.enc.Utf8.parse(""),        // IV는 생략 (CBC모드에서 사용)
+            padding: CryptoJS.pad.Pkcs7,
+            mode: CryptoJS.mode.CBC
         }
     );
-    return cipher.toString();
+    return cipher.toString(); // base64
 }
 
+// AES 복호화
 function decodeByAES256(key, data) {
     const cipher = CryptoJS.AES.decrypt(
         data,
@@ -24,23 +23,19 @@ function decodeByAES256(key, data) {
             mode: CryptoJS.mode.CBC
         }
     );
-    return cipher.toString(CryptoJS.enc.Utf8);
+    return cipher.toString(CryptoJS.enc.Utf8); // UTF-8 문자열
 }
 
-export function encrypt_text(password) {
-    const k = "key";                            // 클라이언트 키
-    const rk = k.padEnd(32, " ");               // AES256은 키 길이가 32바이트
-    const b = password;
-    const eb = encodeByAES256(rk, b);           // 실제 암호화
-    console.log(eb);                            // 로그는 return 뒤에 있으면 안 찍힘
-    return eb;
+// 암호화 함수
+export function encrypt_text(plaintext) {
+    const key = "key".padEnd(32, " ");           // AES256은 32바이트 키 필요
+    const encrypted = encodeByAES256(key, plaintext);
+    return encrypted;
 }
 
-export function decrypt_text() {
-    const k = "key";                            // 서버 키 (동일해야 복호화 가능)
-    const rk = k.padEnd(32, " ");               // AES256은 키 길이가 32바이트
-    const eb = session_get();                   // 세션에서 암호화된 데이터 가져옴
-    const b = decodeByAES256(rk, eb);           // 실제 복호화
-    console.log(b);
+// 🔓 복호화 함수
+export function decrypt_text(encryptedText) {
+    const key = "key".padEnd(32, " ");
+    const decrypted = decodeByAES256(key, encryptedText);
+    return decrypted;
 }
-
