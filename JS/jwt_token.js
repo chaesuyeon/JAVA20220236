@@ -64,12 +64,18 @@ function isAuthenticated() {
 // }
 
 export function checkAuth() {
+    const token = localStorage.getItem("jwt_token");
+
+    if (!token) {
+        console.warn("JWT 없음 (로그아웃 상태)");
+        return;
+    }
+
     const authenticated = isAuthenticated();
 
     if (authenticated) {
         console.log("JWT 인증 성공");
     } else {
-        console.warn("JWT 인증 실패 또는 만료");
         alert("토큰 검증 에러!! 인증되지 않은 접근입니다.");
         window.location.href = '../login/login.html';
     }

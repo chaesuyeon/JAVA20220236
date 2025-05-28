@@ -1,5 +1,5 @@
-// 암호화 키 생성
-async function getKey(password) {
+ // 암호화 키 생성
+export async function getKey(password) {
     const encoder = new TextEncoder();
     const keyMaterial = await crypto.subtle.importKey(
         "raw",
@@ -23,7 +23,7 @@ async function getKey(password) {
 }
 
 // 암호화 함수
-async function encryptAES(plaintext, password) {
+export async function encryptAES(plaintext, password) {
     const iv = crypto.getRandomValues(new Uint8Array(12));
     const key = await getKey(password);
     const encoded = new TextEncoder().encode(plaintext);
@@ -41,7 +41,7 @@ async function encryptAES(plaintext, password) {
 }
 
 // 복호화 함수
-async function decryptAES(cipherWithIv, password) {
+export async function decryptAES(cipherWithIv, password) {
     const [ivHex, ctBase64] = cipherWithIv.split(":");
     const iv = new Uint8Array(ivHex.match(/.{2}/g).map(h => parseInt(h, 16)));
     const key = await getKey(password);
