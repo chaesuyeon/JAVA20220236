@@ -6,8 +6,9 @@
 > index
 
 [✓ JS 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/JS)
-[✓ login 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/login)
+[✓ LOGIN 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/login)
 [✓ POPUP 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/popup)
+[✓ CSS 폴더](https://github.com/chaesuyeon/JAVA20220236/tree/main/css)
 
 ♪ 1주차, 연습해보기!
 
