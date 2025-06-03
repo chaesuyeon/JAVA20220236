@@ -1,6 +1,3 @@
-// ✅ 수정된 로그인 JS 전체 코드입니다.
-// 🔴 수정된 부분은 "// 🔴 수정" 주석으로 표시했습니다.
-
 import { session_set } from './session.js';
 import { encrypt_text } from './crypto.js';
 import { generateJWT } from './jwt_token.js';
@@ -63,11 +60,21 @@ function init() {
 document.addEventListener('DOMContentLoaded', () => init());
 
 function logout() {
+    session_del();
     localStorage.removeItem('jwt_token');
-    sessionStorage.clear();
     document.cookie = 'id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     location.href = '../index_login.html';
 }
+
+function session_del() {
+    if (sessionStorage) {
+        sessionStorage.removeItem("Session_Storage_test");
+        alert('로그아웃 버튼 클릭 확인 : 세션 스토리지를 삭제합니다.');
+    } else {
+        alert('세션 스토리지를 지원하지 않는 브라우저입니다.');
+    }
+}
+
 
 const check_input = async () => {
     const loginForm = document.getElementById('login_form');
@@ -82,25 +89,51 @@ const check_input = async () => {
     const sanitizedPassword = check_xss(passwordValue);
     if (!sanitizedEmail || !sanitizedPassword) return false;
 
-    if (emailValue === '' || emailValue.length < 5) {
-        alert('이메일을 올바르게 입력하세요.');
+    // 이메일 길이 제한 (10자 이하)
+    if (emailValue.length > 10) {
+        alert('이메일은 10자 이하로 입력해야 합니다.');
         return false;
     }
-    if (passwordValue === '' || passwordValue.length < 12) {
-        alert('비밀번호는 12자 이상 입력하세요.');
+
+    
+    // 비밀번호 길이 제한 (12~15자)
+    if (passwordValue.length < 12 || passwordValue.length > 15) {
+        alert('비밀번호는 12자 이상 15자 이하로 입력해야 합니다.');
         return false;
     }
-    if (!(/[A-Z]/.test(passwordValue) && /[a-z]/.test(passwordValue) && /[0-9]/.test(passwordValue) && /[\W_]/.test(passwordValue))) {
+    
+
+    // 비밀번호 복잡성 검사
+    if (!(/[A-Z]/.test(passwordValue) &&
+          /[a-z]/.test(passwordValue) &&
+          /[0-9]/.test(passwordValue) &&
+          /[\W_]/.test(passwordValue))) {
         alert('비밀번호는 대소문자, 숫자, 특수문자를 모두 포함해야 합니다.');
         return false;
     }
 
+    // 3글자 이상 반복 금지 (ex. 아이디아이디, 123123)
+    const repeat3Pattern = /(\w{3,})\1/;
+    if (repeat3Pattern.test(emailValue)) {
+        alert('같은 문자열이 3자 이상 반복되었습니다.');
+        return false;
+    }
+
+    // 숫자 2자리 이상 반복 금지 (ex. 12아이디12)
+    const numberRepeatPattern = /(\d{2,}).*?\1/;
+    if (numberRepeatPattern.test(emailValue)) {
+        alert('숫자 2자 이상이 반복되어 입력되었습니다.');
+        return false;
+    }
+
+    // ID 저장 쿠키 설정
     if (idsave_check.checked) {
         setCookie('id', emailValue, 1);
     } else {
         setCookie('id', emailValue, 0);
     }
 
+    // JWT 생성
     const payload = {
         id: emailValue,
         exp: Math.floor(Date.now() / 1000) + 3600
@@ -108,10 +141,11 @@ const check_input = async () => {
     const jwtToken = generateJWT(payload);
     localStorage.setItem('jwt_token', jwtToken);
 
+    // 비밀번호 암호화 후 세션 저장
     const encrypted = await encrypt_text(passwordValue);
     sessionStorage.setItem('Session_Storage_pass2', encrypted);
 
-    //  수정: session_set 호출 시 인자 추가
+    //  세션 객체 전달
     const userObj = {
         getUserInfo: () => ({
             email: emailValue,
@@ -122,6 +156,7 @@ const check_input = async () => {
 
     loginForm.submit();
 };
+
 
 window.onload = () => {
     document.getElementById('login_btn').addEventListener('click', check_input);
